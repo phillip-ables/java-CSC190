@@ -18,23 +18,32 @@ public class Hw9 {
         String alphebet = " abcdefghijklmnopqrstuvwxyz";
         String encoded = "";
         for(int i = 0; i < p.length() ; i++){
-            //add the charachter atget key value of charachter + the encoded key value
+            //for each letter we add a new letter using the key value which we get from the index of the alphebet string
+            //index consist of original string character at iterations key value
+            //plus index value of our key string which is smaller than our main string
+            //to fix this just modules it by the length of itself so that it just cycles over and over itself
+            //finally make sure this value is in range of the key values with modules alphebet length
             encoded += alphebet.charAt((alphebet.indexOf(p.charAt(i)) + alphebet.indexOf(key.charAt(i%key.length())))%27);
         }
         System.out.println(encoded);
     }
     static void decode(String p, String key){
-        String alphebet = " abcdefghijklmnopqrstuvwxyz";
-        String decoded = "";
+        String keyValue = " abcdefghijklmnopqrstuvwxyz";
+        String encoded = "";
         int t;
+        int code;
         for(int i = 0; i < p.length() ; i++){
-            //get charecter 
-            t = alphebet.indexOf(p.charAt(i)) - alphebet.indexOf(key.charAt(i%key.length()));
-            if(t<0)
-                t += 27;
-            decoded += alphebet.charAt(t);
+            t = keyValue.indexOf(p.charAt(i));
+            code = i%key.length();
+            //add to encode minus to decode
+            t += keyValue.indexOf(key.charAt(code));
+            //greater than 27 to encode less then 0 then plus 27 to decode
+            if(t>=keyValue.length())
+                t -= keyValue.length();
+
+            encoded += keyValue.charAt(t);
         }
-        System.out.println(decoded);
+        System.out.println(encoded);
     }
     public static void main(String[] args) {
         String message, codeKey;
