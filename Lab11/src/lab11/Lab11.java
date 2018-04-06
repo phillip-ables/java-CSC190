@@ -6,6 +6,7 @@
 package lab11;
 
 import java.util.Random;
+import java.util.Scanner;
 
 /*
  course: CSC190
@@ -34,7 +35,20 @@ class NumberGuessingGame {
 
 public class Lab11 {
     public static void main(String[] args) {
-        // TODO code application logic here
+        Scanner in = new Scanner(System.in);
+        Random rnd = new Random();
+        String res;
+        
+        do {
+            int n = rnd.nextInt(1000);
+            NumberGuessingGame myGame = new NumberGuessingGame(n);
+            myGame.playGame();
+            
+            System.out.print("play again?");
+            res = in.next();
+        }while (res.charAt(0) == 'y' || res.charAt(0) == 'Y');
+        
+        System.out.println("Thanks for playing my game!");
     }
     
 }
