@@ -30,11 +30,11 @@ class NumberGuessingGame {
     void playGame(){      
         while(count < 10){
             count++;
-            System.out.println("try number "+(count));
+            //System.out.println("try number "+(count));
 
             //get users guess
             Scanner in = new Scanner(System.in);
-            System.out.println("Take a Guess Bro : ");
+            System.out.println("Guess a number : ");
             int guess = in.nextInt();
 
             //if guess is correct
@@ -42,9 +42,9 @@ class NumberGuessingGame {
                 System.out.println("Congratulations, you won the game! You got it in "+count+ "tries");
                 return;
             }else if(guess > secret) 
-                System.out.println(guess+" is too high");
+                System.out.println("The number "+guess+" is too high");
             else
-                System.out.println(guess+" is too low");
+                System.out.println("The number "+guess+" is too low");
         }
         System.out.println("Sorry, you lost the game");
     }
