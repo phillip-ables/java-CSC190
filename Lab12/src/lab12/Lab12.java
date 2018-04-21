@@ -3,50 +3,37 @@ package lab12;
 import java.util.Scanner;
 
 /*
-
+course: CSC190
+project: lab11
+date: 4-13
+author: Phillip Ables
+purpose: 
+    use the babylon method to find a square root,
+    the method we create to solve the babylon method needs a good seed
+    use the information from wiki to call a function that makes a good seed
  */
 public class Lab12 {
-    static double getSeed(double n){
-        double count = 0.0;
-        if(n > 99){
-            while(n > 100) {
-                n = n/100;
-                count += 2;
-            }
-        }
-        else if(n < 0){
-            while(n < 0){
-                n *= 100;
-                count -= 2;
-            }
-        }
-        else{
-            count++;
-        }
-        return n * count * 10;
-    }
-    static double mySqrt(double n){
-        double seed  = getSeed(n);
-        double lastG = 0.0;
-        
-        while(seed != lastG){
-            lastG = seed;
-            seed = (seed+(n/seed))/2;
-        }
-        return seed;
-    }
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        System.out.print("Enter n(-1 to stop: ");
-        double n = in .nextDouble();
-        
-        while ( n > 0){
-            System.out.println("my sqrt of "+n+" = "+ mySqrt(n));
-            System.out.println("Math.'s sqrt of "+n+" = "+Math.sqrt(n));
-            System.out.print("Enter n(-1 to stop): ");
-            n = in.nextDouble();       
-        }
-        System.out.println("bye");
+        int n = 5;
+        for (int i=0;i<n;i++) {
+
+        int j;
+
+        for (j=0;j<n-i;j++)
+
+        System.out.printf("%4s"," ");
+
+
+        int k=i*2+1;
+
+        for (j=0;j<=i;j++)
+
+        System.out.printf("%4d",k+i*j);
+
+        System.out.println();
+
+}
+
     }
     
 }
