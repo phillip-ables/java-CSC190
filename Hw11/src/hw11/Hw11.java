@@ -14,53 +14,40 @@ import java.util.Scanner;
  * – (), {}, [], and numbers/operators are typed correctly.  
  */
 public class Hw11 {
-    static void possiblePairs(String s){
+    static String possiblePairs(String s){
         char ch;
         int open, close;
         String target = s;
-        String check = "";
-        String returnString = "";
+        open = close = 0;
         System.out.println("Take string "+s);
-        //first lets seperat paranthesis
-        while(target != check){
-            check = target;
-            open = close = 0;
-            for(int i = 0; i < target.length(); i++){
-                ch = target.charAt(i);
-                if(ch == '('){
-                    open = i;
-                    close = target.lastIndexOf(')');
-                    if(close < 0){
-                        System.out.println("Invalid");
-                        return 0;
-                    }                
-                }
-                else if(ch == '{'){
-                    open = i;
-                    close = target.lastIndexOf('}');
-                    if(close < 0){
-                        System.out.println("Invalid");
-                        return 0;
-                    }                
-                }
-                else if(ch == '['){
-                    open = i;
-                    close = target.lastIndexOf(']');
-                    if(close < 0){
-                        System.out.println("Invalid");
-                        return 0;
-                    }                
-                }
-                if(close > 0){
-                    returnString += target.substring(0,i-1);
-                    target = target.substring(open, close-1);
-                    returnString += ""EvalE(target)+
-                }
+        for(int i = 0; i < target.length(); i++){
+            ch = target.charAt(i);
+            if(ch == '('){
+                open = i;
+                close = target.lastIndexOf(')');
+                if(close < 0){
+                    System.out.println("Invalid");
+                }                
             }
-            //inner most bracket should be found
-            
+            else if(ch == '{'){
+                open = i;
+                close = target.lastIndexOf('}');
+                if(close < 0){
+                    System.out.println("Invalid");
+                }                
+            }
+            else if(ch == '['){
+                open = i;
+                close = target.lastIndexOf(']');
+                if(close < 0){
+                    System.out.println("Invalid");
+                }                
+            }
+            if(close > 0)
+                System.out.println(target.substring(open+1, close));
+
         }
-        return EvalE(returnString);
+        return "Nah";
     }
     
     static int evalMD(String s) {
