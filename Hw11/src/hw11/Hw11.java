@@ -14,40 +14,66 @@ import java.util.Scanner;
  * – (), {}, [], and numbers/operators are typed correctly.  
  */
 public class Hw11 {
-    static String possiblePairs(String s){
+    //check if any type of bracket present then send it to the innerPair function
+    static void possiblePairs(String s){
+        char ch;
+        for(int i =0; i < s.length(); i++){
+            ch = s.charAt(i);
+            //if we have reason to believe there are brackets involved
+            //send to inner pairs
+            if(ch == '{' || ch == '{' || ch == '['){
+                innerPair(s);
+                return;
+            }
+        }
+        //paran took care of
+        System.out.println(EvalE(s));
+    }
+    //removes inner most bracket
+    static void innerPair(String s){
         char ch;
         int open, close;
-        String target = s;
         open = close = 0;
-        System.out.println("Take string "+s);
-        for(int i = 0; i < target.length(); i++){
-            ch = target.charAt(i);
+        for(int i = 0; i < s.length(); i++){
+            ch = s.charAt(i);
+            //check for bracket
+            //set open index and find closing bracket index
+            //if no matching pair end code let user know invalid
             if(ch == '('){
                 open = i;
-                close = target.lastIndexOf(')');
-                if(close < 0){
+                if(close == s.lastIndexOf(')'))
+                    close = s.lastIndexOf(')', close);
+                else if (s.lastIndexOf(')') < 0){
                     System.out.println("Invalid");
                 }                
+                else
+                    close = s.lastIndexOf(')');
             }
             else if(ch == '{'){
                 open = i;
-                close = target.lastIndexOf('}');
-                if(close < 0){
+                if(close == s.lastIndexOf('}'))
+                    close = s.lastIndexOf('}', close);
+                else if (s.lastIndexOf('}') < 0){
                     System.out.println("Invalid");
                 }                
+                else
+                    close = s.lastIndexOf('}');
             }
             else if(ch == '['){
                 open = i;
-                close = target.lastIndexOf(']');
-                if(close < 0){
+                if(close == s.lastIndexOf(']'))
+                    close = s.lastIndexOf(']', close);
+                else if (s.lastIndexOf(']') < 0){
                     System.out.println("Invalid");
                 }                
+                else
+                    close = s.lastIndexOf(']');
             }
-            if(close > 0)
-                System.out.println(target.substring(open+1, close));
-
         }
-        return "Nah";
+        //if pair was found evaluate inner pair and return a substring with that value instaead of paranthesis
+        if(close > 0){
+            possiblePairs(s.substring(0,open)+EvalE(s.substring(open+1,close))+s.substring(close+1));
+        }
     }
     
     static int evalMD(String s) {
@@ -139,7 +165,6 @@ public class Hw11 {
                 || previousOP =='+' && firstOP == '?')
         {
             
-            System.out.println("add");
            result += evalMD(tmp);
         }
         else
@@ -157,7 +182,7 @@ public class Hw11 {
             System.out.print("Enter expression: ");
             String e = in.next();
             
-            System.out.println(possiblePairs(e));
+            possiblePairs(e);
             
             res = "yes";
             System.out.print("Try again?: ");
