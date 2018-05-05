@@ -3,7 +3,7 @@ package lab15;
 course: CSC190
 project: Lab15
 date: 5/4, 2018
-author: (your name)
+author: Phillip Ables
 purpose: 
     method encode(String w) that takes a word and returns the corresponding Morse code string. 
     Any invalid character other than alphabets in the input should be ignored. 
@@ -40,46 +40,49 @@ class MorseCode {
     }
     
     String decode(String m) {
-        int nextSpace = 1;
+        String lastM = "";
+        int nextSpace = m.length() -1;
         String encodedString = "";
         //for every space in string
-        while(true){
-            //get the next space index
-            if(m.indexOf(" ") < 0){
-                for(int i = 0; i < m.length() -1; i++)
-                {
-                    if(this.m[i].equals(m))
-                    {
-
-                        System.out.println(m.substring(0,nextSpace));
-                        System.out.println(nextSpace);
-                        encodedString += indexA.charAt(i);
-                        break;
-                    }   
-                }
-                break;
-            }else{
-                System.out.println("else started");
+        do{
+            if(m.indexOf(" ") != -1)
+            {
                 nextSpace = m.indexOf(" ");
+                System.out.println(m.substring(0,nextSpace));
+                System.out.println("NextSpace " + nextSpace);
                 //find that morse code!!
-                for(int i = 0; i < m.length() -1; i++)
+                for(int i = 0; i < this.m.length; i++)
                 {
                     if(this.m[i].equals(m.substring(0, nextSpace)))
                     {
-                        System.out.println(m.substring(0,nextSpace));
-                        System.out.println(nextSpace);
-                        encodedString += indexA.charAt(i);
-                        
                         System.out.println(indexA.charAt(i));
-                        m = m.substring(nextSpace+1);
-                        System.out.println("about to break");
+
+                        encodedString += indexA.charAt(i);
+                        System.out.println("New m = "+ m);
                         break;
                     }
                 }
+                lastM = m;
+                m = m.substring(nextSpace+1);
             }
-        }
-        return encodedString;
+            else
+            {
+                System.out.println("Last Run "+m);
+                for(int i = 0; i < this.m.length; i++)
+                {
+                    if(this.m[i].equals(m))
+                    {
+                        encodedString += indexA.charAt(i);
+                        break;
+                    }
+                }
+                lastM = m;
+            }
+               
+        }while(m != lastM);
         
+        System.out.print("Encoded String = ");
+        return encodedString;
     }
 }
 
